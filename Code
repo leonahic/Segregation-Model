@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  2 16:31:20 2020
-
-@author: Cihan
-"""
-       
 def sm(a,b):
     """ a is the length of the edges
         b is the number of ticks"""
