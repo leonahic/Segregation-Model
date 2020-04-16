@@ -1,0 +1,319 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Apr  2 16:31:20 2020
+
+@author: Cihan
+"""
+       
+def sm(a,b):
+    """ a is the length of the edges
+        b is the number of ticks"""
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import matplotlib.animation as animation
+    s=np.random.choice([0,1,2],size=(1,a,a),p=[0.20,0.40,0.40])
+    #print(s)
+    apm=[]
+    apm.append(s[0].copy())     
+    for gen in range(b):
+        for row in range(a):
+            for col in range(a):
+                if row==a-1 and col!=a-1:
+                    n=[]
+                    if s[0,row,col]!=0:
+                        x=s[0,row,col]
+                        n.append(s[0,row,col+1])
+                        n.append(s[0,0,col])
+                        n.append(s[0,0,col+1])
+                        n.append(s[0,row-1,col-1])
+                        n.append(s[0,row-1,col])
+                        n.append(s[0,row,col-1])
+                        n.append(s[0,row-1,col+1])
+                        n.append(s[0,0,col-1])
+                        unique, counts = np.unique(n, return_counts=True)
+                        y=dict(zip(unique, counts))
+                        if x in y:
+                            if y[x]<4:
+                                if s[0,row,col+1]==0:
+                                    s[0,row,col+1]=x
+                                    s[0,row,col]=0
+                                elif s[0,0,col]==0:
+                                    s[0,0,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,0,col+1]==0:
+                                    s[0,0,col+1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col-1]==0:
+                                    s[0,row-1,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col]==0:
+                                    s[0,row-1,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,row,col-1]==0:
+                                    s[0,row,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col+1]==0:
+                                    s[0,row-1,col+1]=x
+                                    s[0,row,col]=0
+                                elif s[0,0,col-1]==0:
+                                    s[0,0,col-1]=x
+                                    s[0,row,col]=0
+                            else:
+                                continue
+                        else:
+                            if s[0,row,col+1]==0:
+                                s[0,row,col+1]=x
+                                s[0,row,col]=0
+                            elif s[0,0,col]==0:
+                                s[0,0,col]=x
+                                s[0,row,col]=0
+                            elif s[0,0,col+1]==0:
+                                s[0,0,col+1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col-1]==0:
+                                s[0,row-1,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col]==0:
+                                s[0,row-1,col]=x
+                                s[0,row,col]=0
+                            elif s[0,row,col-1]==0:
+                                s[0,row,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col+1]==0:
+                                s[0,row-1,col+1]=x
+                                s[0,row,col]=0
+                            elif s[0,0,col-1]==0:
+                                s[0,0,col-1]=x
+                                s[0,row,col]=0
+                            else:
+                                continue
+                    else:
+                        continue
+                elif col==a-1 and row!=a-1:
+                    n=[]
+                    if s[0,row,col]!=0:   
+                        x=s[0,row,col]
+                        n.append(s[0,row,0])
+                        n.append(s[0,row+1,col])
+                        n.append(s[0,row+1,0])
+                        n.append(s[0,row-1,col-1])
+                        n.append(s[0,row-1,col])
+                        n.append(s[0,row,col-1])
+                        n.append(s[0,row-1,0])
+                        n.append(s[0,row+1,col-1])
+                        unique, counts = np.unique(n, return_counts=True)
+                        y=dict(zip(unique, counts))
+                        if x in y:
+                            if y[x]<4:
+                                if s[0,row,0]==0:
+                                    s[0,row,0]=x
+                                    s[0,row,col]=0
+                                elif s[0,row+1,col]==0:
+                                    s[0,row+1,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,row+1,0]==0:
+                                    s[0,row+1,0]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col-1]==0:
+                                    s[0,row-1,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col]==0:
+                                    s[0,row-1,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,row,col-1]==0:
+                                    s[0,row,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,0]==0:
+                                    s[0,row-1,0]=x
+                                    s[0,row,col]=0
+                                elif s[0,row+1,col-1]==0:
+                                    s[0,row+1,col-1]=x
+                                    s[0,row,col]=0
+                            else:
+                                continue
+                        else:
+                            if s[0,row,0]==0:
+                                s[0,row,0]=x
+                                s[0,row,col]=0
+                            elif s[0,row+1,col]==0:
+                                s[0,row+1,col]=x
+                                s[0,row,col]=0
+                            elif s[0,row+1,0]==0:
+                                s[0,row+1,0]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col-1]==0:
+                                s[0,row-1,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col]==0:
+                                s[0,row-1,col]=x
+                                s[0,row,col]=0
+                            elif s[0,row,col-1]==0:
+                                s[0,row,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,0]==0:
+                                s[0,row-1,0]=x
+                                s[0,row,col]=0
+                            elif s[0,row+1,col-1]==0:
+                                s[0,row+1,col-1]=x
+                                s[0,row,col]=0
+                            else:
+                                continue
+                    else:
+                        continue
+                elif col==a-1 and row==a-1:
+                    n=[]
+                    if s[0,row,col]!=0:   
+                        x=s[0,row,col]
+                        n.append(s[0,row,0])
+                        n.append(s[0,0,col])
+                        n.append(s[0,0,0])
+                        n.append(s[0,row-1,col-1])
+                        n.append(s[0,row-1,col])
+                        n.append(s[0,row,col-1])
+                        n.append(s[0,row-1,0])
+                        n.append(s[0,0,col-1])
+                        unique, counts = np.unique(n, return_counts=True)
+                        y=dict(zip(unique, counts))
+                        if x in y:
+                            if y[x]<4:
+                                if s[0,row,0]==0:
+                                    s[0,row,0]=x
+                                    s[0,row,col]=0
+                                elif s[0,0,col]==0:
+                                    s[0,0,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,0,0]==0:
+                                    s[0,0,0]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col-1]==0:
+                                    s[0,row-1,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col]==0:
+                                    s[0,row-1,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,row,col-1]==0:
+                                    s[0,row,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,0]==0:
+                                    s[0,row-1,0]=x
+                                    s[0,row,col]=0
+                                elif s[0,0,col-1]==0:
+                                    s[0,0,col-1]=x
+                                    s[0,row,col]=0
+                            else:
+                                continue
+                        else:
+                            if s[0,row,0]==0:
+                                s[0,row,0]=x
+                                s[0,row,col]=0
+                            elif s[0,0,col]==0:
+                                s[0,0,col]=x
+                                s[0,row,col]=0
+                            elif s[0,0,0]==0:
+                                s[0,0,0]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col-1]==0:
+                                s[0,row-1,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col]==0:
+                                s[0,row-1,col]=x
+                                s[0,row,col]=0
+                            elif s[0,row,col-1]==0:
+                                s[0,row,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,0]==0:
+                                s[0,row-1,0]=x
+                                s[0,row,col]=0
+                            elif s[0,0,col-1]==0:
+                                s[0,0,col-1]=x
+                                s[0,row,col]=0
+                            else:
+                                continue
+                    else:
+                        continue
+                elif col!=a-1 and row!=a-1:
+                    n=[]
+                    if s[0,row,col]!=0:   
+                        x=s[0,row,col]
+                        n.append(s[0,row,col+1])
+                        n.append(s[0,row+1,col])
+                        n.append(s[0,row+1,col+1])
+                        n.append(s[0,row-1,col-1])
+                        n.append(s[0,row-1,col])
+                        n.append(s[0,row,col-1])
+                        n.append(s[0,row-1,col+1])
+                        n.append(s[0,row+1,col-1])
+                        unique, counts = np.unique(n, return_counts=True)
+                        y=dict(zip(unique, counts))
+                        if x in y:
+                            if y[x]<4:
+                                if s[0,row,col+1]==0:
+                                    s[0,row,col+1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row+1,col]==0:
+                                    s[0,row+1,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,row+1,col+1]==0:
+                                    s[0,row+1,col+1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col-1]==0:
+                                    s[0,row-1,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col]==0:
+                                    s[0,row-1,col]=x
+                                    s[0,row,col]=0
+                                elif s[0,row,col-1]==0:
+                                    s[0,row,col-1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row-1,col+1]==0:
+                                    s[0,row-1,col+1]=x
+                                    s[0,row,col]=0
+                                elif s[0,row+1,col-1]==0:
+                                    s[0,row+1,col-1]=x
+                                    s[0,row,col]=0
+                            else:
+                                continue
+                        else:
+                            if s[0,row,col+1]==0:
+                                s[0,row,col+1]=x
+                                s[0,row,col]=0
+                            elif s[0,row+1,col]==0:
+                                s[0,row+1,col]=x
+                                s[0,row,col]=0
+                            elif s[0,row+1,col+1]==0:
+                                s[0,row+1,col+1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col-1]==0:
+                                s[0,row-1,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col]==0:
+                                s[0,row-1,col]=x
+                                s[0,row,col]=0
+                            elif s[0,row,col-1]==0:
+                                s[0,row,col-1]=x
+                                s[0,row,col]=0
+                            elif s[0,row-1,col+1]==0:
+                                s[0,row-1,col+1]=x
+                                s[0,row,col]=0
+                            elif s[0,row+1,col-1]==0:
+                                s[0,row+1,col-1]=x
+                                s[0,row,col]=0
+                            else:
+                                continue
+                    else:
+                        continue
+        #print('-----------')
+        #print(s)
+        apm.append(s[0].copy())
+    images = []   
+    fig = plt.figure(figsize=(a,a))
+    for i in range(0, len(apm)):
+        im = plt.imshow(apm[i], cmap='Oranges')
+        images.append([im])
+    ani = animation.ArtistAnimation(fig, images, interval=300)
+    #matplotlib.pyplot.show()
+    ani.save('Segregation Model Simple.gif', dpi=100, writer='imagemagick')
+
+
+
+
